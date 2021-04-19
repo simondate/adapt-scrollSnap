@@ -18,6 +18,21 @@ define([
 
         initialize: function() {
             this.listenToOnce(Adapt, 'adapt:start', this.onAdaptStart);
+            this.listenTo(Adapt, "blockView:postRender", this.addBlockPrompts);
+        },
+
+        addBlockPrompts: function(blockView) {
+            if(!blockView.model.get('_scrollSnap') || !blockView.model.get('_scrollSnap')._showScrollIcon) return;
+            var template = Handlebars.templates.scrollPromptView;
+            var data = blockView.model.get('_scrollSnap');
+            $(blockView.$el).append(template(data));
+            
+            const context = this;
+            const $promptButton = $(blockView.$el).find('.scrollSnap-prompt-button');
+
+            $(document).find($promptButton).on('click', function() {
+                context.snapDown();
+            });
         },
 
         _disableTabindexes: function() {

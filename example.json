@@ -8,3 +8,10 @@
         "label": "Scroll down to continue"
     }
 }
+
+// blocks.json
+
+"_scrollSnap": {
+    "_showScrollIcon": true,
+    "scrollText": "Scroll to learn"
+}
